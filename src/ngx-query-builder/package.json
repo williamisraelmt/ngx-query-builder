@@ -1,0 +1,23 @@
+{
+  "name": "ngx-query-builder",
+  "version": "0.0.1",
+  "description": "Angular query builder",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vladify/ngx-query-builder.git"
+  },
+  "author": "Vladyslav Danylovych",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vladify/ngx-query-builder/issues"
+  },
+  "homepage": "https://github.com/vladify/ngx-query-builder#readme",
+  "keywords": [
+    "angular",
+    "querybuilder"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^8.2.14",
+    "@angular/core": "^8.2.14"
+  }
+}
