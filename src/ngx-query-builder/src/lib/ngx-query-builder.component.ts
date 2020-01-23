@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-ngx-query-builder',
+  selector: 'ngx-query-builder',
   template: `
     <p>
       ngx-query-builder works!
