@@ -13,14 +13,14 @@
 
     <div class="ngx-actions">
       <button type="button" class="ngx-control ngx-btn ngx-btn-add" (click)="addRule()">
-        <span class="ngx-icon-plus"></span> Rule
+        Add Rule
       </button>
       <button type="button" class="ngx-control ngx-btn ngx-btn-add" (click)="addRuleSet()">
-        <span class="ngx-icon-plus"></span> Group
+        Add Group
       </button>
       <ng-container *ngIf="hasParentRuleSet()">
         <button type="button" class="ngx-control ngx-btn ngx-btn-remove" (click)="removeRuleSet(index)">
-          <span class="ngx-icon-cross"></span>
+          Remove
         </button>
       </ng-container>
     </div>
@@ -118,7 +118,7 @@
             </div>
             <div class="ngx-rule-controls">
               <button type="button" class="ngx-control ngx-btn ngx-btn-remove" (click)="removeRule(i)">
-                <span class="ngx-icon-cross"></span>
+                Remove
               </button>
             </div>
           </div>
