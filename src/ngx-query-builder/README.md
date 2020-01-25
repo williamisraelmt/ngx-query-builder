@@ -28,7 +28,7 @@ export class AppModule {}
 
 ```ts
 import { Component } from '@angular/core';
-import {NgxQueryBuilderModule} from 'ngx-query-builder';
+import {QueryBuilderFieldMap, RuleSet} from 'ngx-query-builder';
 
 @Component({
   selector: 'app-root',
