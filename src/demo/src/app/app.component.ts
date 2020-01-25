@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {QueryBuilderFieldMap, RuleSet} from '../../../ngx-query-builder/src/lib/interfaces/ngx-query-builder.interfaces';
+// import {NgxQueryBuilderModule} from 'ngx-query-builder';
 
 @Component({
   selector: 'app-root',

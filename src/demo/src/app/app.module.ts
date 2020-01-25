@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
 import {NgxQueryBuilderModule} from '../../../ngx-query-builder/src/lib/ngx-query-builder.module';
+// import {NgxQueryBuilderModule} from 'ngx-query-builder';
 
 @NgModule({
   declarations: [
