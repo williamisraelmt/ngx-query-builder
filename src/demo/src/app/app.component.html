@@ -1,7 +1,13 @@
-<h1>{{title}}</h1>
+<div class="demo-container">
+  <div class="demo-builder">
+    <div class="title">NgxQueryBuilder</div>
+    <div class="query-builder">
+      <ngx-query-builder [data]="query" [fieldMap]="fieldMap"></ngx-query-builder>
+    </div>
+  </div>
+  <div class="demo-output">
+    <div class="title">Output</div>
+    <textarea readonly>{{query | json}}</textarea>
+  </div>
+</div>
 
-<ngx-query-builder [data]="query" [fieldMap]="fieldMap"></ngx-query-builder>
-
-<textarea style="height: 500px; width: 100%; margin-top: 20px;">
-  {{query | json}}
-</textarea>

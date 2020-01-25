@@ -1,0 +1,31 @@
+.demo-container {
+  display: flex;
+  padding: 10px;
+
+  .title {
+    font-weight: bold;
+    margin: 20px 0;
+    font-size: 30px;
+  }
+
+  .demo-builder {
+    flex: 1;
+    padding-right: 10px;
+
+    .query-builder {
+      height: calc(100vh - 120px);
+      overflow-y: auto;
+    }
+  }
+
+  .demo-output {
+    flex: 1;
+    padding-left: 10px;
+
+    textarea {
+      height: calc(100vh - 120px);
+      width: 100%;
+      resize: none;
+    }
+  }
+}

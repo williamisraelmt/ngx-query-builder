@@ -1,22 +1,27 @@
 <div class="ngx-query-builder">
-
   <div class="ngx-group-controls">
     <div class="ngx-condition-switcher">
       <div>
-        <input name="{{'condition' + index}}" type="radio" class="ngx-switch-btn" [(ngModel)]="data.condition" value="and" #andOption>
-        <label (click)="changeCondition(andOption.value)" class="ngx-switch-label">AND</label>
+        <input name="{{'condition' + index}}" type="radio" class="ngx-switch-radio" [(ngModel)]="data.condition" value="and" #andOption>
+        <label (click)="changeCondition(andOption.value)" class="ngx-control ngx-switch-label">AND</label>
       </div>
       <div>
-        <input name="{{'condition' + index}}" type="radio" class="ngx-switch-btn" [(ngModel)]="data.condition" value="or" #orOption>
-        <label (click)="changeCondition(orOption.value)" class="ngx-switch-label">OR</label>
+        <input name="{{'condition' + index}}" type="radio" class="ngx-switch-radio" [(ngModel)]="data.condition" value="or" #orOption>
+        <label (click)="changeCondition(orOption.value)" class="ngx-control ngx-switch-label">OR</label>
       </div>
     </div>
 
     <div class="ngx-actions">
-      <button type="button" class="ngx-btn ngx-btn-add" (click)="addRule()">Add Rule</button>
-      <button type="button" class="ngx-btn ngx-btn-add" (click)="addRuleSet()">Add Group</button>
+      <button type="button" class="ngx-control ngx-btn ngx-btn-add" (click)="addRule()">
+        <span class="ngx-icon-plus"></span> Rule
+      </button>
+      <button type="button" class="ngx-control ngx-btn ngx-btn-add" (click)="addRuleSet()">
+        <span class="ngx-icon-plus"></span> Group
+      </button>
       <ng-container *ngIf="hasParentRuleSet()">
-        <button type="button" class="ngx-btn ngx-btn-remove" (click)="removeRuleSet(index)">Remove Group</button>
+        <button type="button" class="ngx-control ngx-btn ngx-btn-remove" (click)="removeRuleSet(index)">
+          <span class="ngx-icon-cross"></span>
+        </button>
       </ng-container>
     </div>
   </div>
@@ -34,7 +39,7 @@
             <div class="ngx-rule">
 
               <div class="ngx-field">
-                <select class="ngx-control" [(ngModel)]="child.field" (change)="changeField(child, i)">
+                <select class="ngx-control ngx-select" [(ngModel)]="child.field" (change)="changeField(child, i)">
                   <option *ngFor="let field of getFields()" [value]="field.value">
                     {{field.name}}
                   </option>
@@ -42,7 +47,7 @@
               </div>
 
               <div class="ngx-operator">
-                <select class="ngx-control" [(ngModel)]="child.operator">
+                <select class="ngx-control ngx-select" [(ngModel)]="child.operator">
                   <option *ngFor="let operator of operatorsService.getOperators(child, fieldMap)" [value]="operator">
                     {{operatorsService.getOperatorDisplayName(operator)}}
                   </option>
@@ -53,27 +58,27 @@
 
                 <!-- STING -->
                 <ng-container *ngSwitchCase="operatorsService.INPUT_TYPE_STRING">
-                  <input class="ngx-control" type="text" [(ngModel)]="child.value">
+                  <input class="ngx-control ngx-input" type="text" [(ngModel)]="child.value">
                 </ng-container>
 
                 <!-- INTEGER -->
                 <ng-container *ngSwitchCase="operatorsService.INPUT_TYPE_INTEGER">
-                  <input class="ngx-control" type="number" [(ngModel)]="child.value">
+                  <input class="ngx-control ngx-input" type="number" [(ngModel)]="child.value">
                 </ng-container>
 
                 <!-- DOUBLE -->
                 <ng-container *ngSwitchCase="operatorsService.INPUT_TYPE_DOUBLE">
-                  <input class="ngx-control" type="number" [(ngModel)]="child.value">
+                  <input class="ngx-control ngx-input" type="number" [(ngModel)]="child.value">
                 </ng-container>
 
                 <!-- DATE -->
                 <ng-container *ngSwitchCase="operatorsService.INPUT_TYPE_DATE">
-                  <input class="ngx-control" type="date" [(ngModel)]="child.value">
+                  <input class="ngx-control ngx-input" type="date" [(ngModel)]="child.value">
                 </ng-container>
 
                 <!-- TIME -->
                 <ng-container *ngSwitchCase="operatorsService.INPUT_TYPE_TIME">
-                  <input class="ngx-control" type="time" [(ngModel)]="child.value">
+                  <input class="ngx-control ngx-input" type="time" [(ngModel)]="child.value">
                 </ng-container>
 
                 <!-- BOOLEAN -->
@@ -92,7 +97,7 @@
 
                 <!-- SELECT -->
                 <ng-container *ngSwitchCase="operatorsService.INPUT_TYPE_SELECT">
-                  <select class="ngx-control" [(ngModel)]="child.value">
+                  <select class="ngx-control ngx-select" [(ngModel)]="child.value">
                     <option *ngFor="let opt of getRuleOptions(child)" [value]="opt.value">
                       {{opt.name}}
                     </option>
@@ -112,7 +117,9 @@
 
             </div>
             <div class="ngx-rule-controls">
-              <button type="button" class="ngx-btn ngx-btn-remove" (click)="removeRule(i)">Remove rule</button>
+              <button type="button" class="ngx-control ngx-btn ngx-btn-remove" (click)="removeRule(i)">
+                <span class="ngx-icon-cross"></span>
+              </button>
             </div>
           </div>
 
@@ -127,6 +134,5 @@
     </ul>
 
   </div>
-
 </div>
 

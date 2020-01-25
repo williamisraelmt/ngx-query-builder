@@ -1,15 +1,40 @@
-$group-border-color: #ccc;
-$rule-border-color: #eee;
-$control-color: #495057;
-
-*, ::after, ::before {
-  box-sizing: border-box;
+@font-face {
+  font-family: 'ngx-icons';
+  src:
+    url('./fonts/ngx-icons.ttf?vvym3q') format('truetype'),
+    url('./fonts/ngx-icons.woff?vvym3q') format('woff'),
+    url('./fonts/ngx-icons.svg?vvym3q#ngx-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
 }
 
-.ngx-query-builder {
-  border: 1px solid $group-border-color;
-  padding: 10px;
-  margin: 5px 0;
+[class^="ngx-icon-"], [class*=" ngx-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'ngx-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 40px;
+  font-size: 14px;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ngx-icon-plus {
+  margin-right: 4px;
+
+  &:before {
+    content: "\ea0a";
+  }
+}
+
+.ngx-icon-cross:before {
+  content: "\ea0f";
 }
 
 .ngx-group-controls {
@@ -29,9 +54,6 @@ $control-color: #495057;
       border-color: #2e6da4;
       color: #fff;
       transition-duration: 0.3s;
-      padding: .375rem .75rem;
-      font-size: 1rem;
-      line-height: 1.5;
 
       &:hover {
         cursor: pointer;
@@ -39,7 +61,7 @@ $control-color: #495057;
       }
     }
 
-    .ngx-switch-btn {
+    .ngx-switch-radio {
       position: absolute;
       clip: rect(0, 0, 0, 0);
       height: 1px;
@@ -58,6 +80,7 @@ $control-color: #495057;
 
   .ngx-actions {
     display: flex;
+    margin-right: 10px;
   }
 }
 
@@ -65,19 +88,47 @@ $control-color: #495057;
 
   ul {
     margin: 0;
-    padding: 0 15px 0 25px;
+    padding: 0 10px 0 25px;
   }
 
   li {
     list-style: none;
   }
 
+  li.ngx-connector {
+    position: relative;
+    border: 1px solid #cccccc;
+    margin: 8px 0;
+    padding: 10px;
+
+    &::before {
+      top: -9px;
+      border-width: 0 0 2px 2px;
+    }
+
+    &::after {
+      border-width: 0 0 0 2px;
+      top: 50%;
+    }
+
+    &::before, &::after {
+      content: '';
+      left: -14px;
+      border-color: #cccccc;
+      border-style: solid;
+      width: 12px;
+      height: calc(50% + 9px);
+      position: absolute;
+    }
+
+    &:last-child::after {
+      content: none;
+    }
+  }
+
   .ngx-rule-wrap {
     display: flex;
     flex-wrap: wrap;
-    padding: 5px 8px;
-    border: 1px solid $rule-border-color;
-    margin: 8px 0;
 
     .ngx-rule {
       flex: 1;
@@ -104,14 +155,21 @@ $control-color: #495057;
 }
 
 .ngx-control {
+  padding: 0 .75rem;
+  height: 40px;
+  line-height: 40px;
+  font-size: 1rem;
+}
+
+.ngx-input,
+.ngx-select,
+.ngx-multi-select {
   display: block;
   width: 100%;
-  height: calc(2.25rem + 2px);
-  padding: .375rem .75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: $control-color;
+  color: #495057;
+  padding: .5rem .75rem;
   background-color: #fff;
+  box-sizing: border-box;
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: .25rem;
@@ -124,7 +182,7 @@ $control-color: #495057;
 
 .ngx-boolean-wrap {
   display: flex;
-  color: $control-color;
+  color: #495057;
 }
 
 .ngx-btn {
@@ -137,9 +195,6 @@ $control-color: #495057;
   user-select: none;
   background-color: transparent;
   border: 1px solid transparent;
-  padding: .375rem .75rem;
-  font-size: 1rem;
-  line-height: 1.5;
   outline: none;
   transition-duration: 0.3s;
 }
@@ -164,31 +219,3 @@ $control-color: #495057;
   }
 }
 
-
-.ngx-connector {
-  position: relative;
-
-  &::before {
-    top: -5px;
-    border-width: 0 0 2px 2px;
-  }
-
-  &::after {
-    border-width: 0 0 0 2px;
-    top: 50%;
-  }
-
-  &::before, &::after {
-    content: '';
-    left: -12px;
-    border-color: $group-border-color;
-    border-style: solid;
-    width: 12px;
-    height: calc(50% + 12px);
-    position: absolute;
-  }
-
-  &:last-child::after {
-    content: none;
-  }
-}

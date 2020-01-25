@@ -7,54 +7,71 @@ import {QueryBuilderFieldMap, RuleSet} from '../../../ngx-query-builder/src/lib/
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Demo';
 
   query: RuleSet = {
     condition: 'and',
     rules: [
       {
-        field: 'occupation',
+        field: 'category',
         type: 'select',
         operator: 'equal',
-        value: ['student']
+        value: ['wallets']
+      },
+      {
+        field: 'price',
+        type: 'double',
+        operator: 'greater',
+        value: 45.5
+      },
+      {
+        field: 'inStock',
+        type: 'boolean',
+        operator: 'equal',
+        value: true
+      },
+      {
+        field: 'createdOn',
+        type: 'date',
+        operator: 'equal',
+        value: '2020-01-20'
       }
     ]
   };
 
   fieldMap: QueryBuilderFieldMap = {
-    firstName: {
-      name: 'First Name',
-      type: 'string',
-      settings: {
-        nullableOperators: true
-      }
-    },
-    lastName: {
-      name: 'Last Name',
+    name: {
+      name: 'Name',
       type: 'string',
       settings: {
         nullableOperators: true,
         emptyOperators: true
       }
     },
-    age: {
-      name: 'Age',
-      type: 'integer'
+    price: {
+      name: 'Price',
+      type: 'double'
     },
-    gender: {
-      name: 'Gender',
-      type: 'string'
+    createdOn: {
+      name: 'Created On',
+      type: 'date'
     },
     inStock: {
       name: 'In Stock',
       type: 'boolean'
     },
-    occupation: {
-      name: 'Occupation',
+    category: {
+      name: 'Category',
       type: 'select',
       options: [
-        {name: 'Teacher', value: 'teacher'},
-        {name: 'Student', value: 'student'}
+        {name: 'Jackets', value: 'jackets'},
+        {name: 'Hats', value: 'hats'},
+        {name: 'Sandals', value: 'sandals'},
+        {name: 'Wallets', value: 'wallets'},
+        {name: 'Belts', value: 'belts'},
+        {name: 'T-Shirts', value: 't-shirts'},
+        {name: 'Toys', value: 'toys'},
+        {name: 'Jumpers', value: 'jumpers'},
+        {name: 'Jewellery', value: 'jewellery'},
       ]
     }
   };
