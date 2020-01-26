@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {Field, QueryBuilderFieldMap, Rule, RuleSet, QueryBuilderSettings} from './interfaces/ngx-query-builder.interfaces';
 import {OperatorsService} from './services/operators.service';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
@@ -24,7 +24,6 @@ export class NgxQueryBuilderComponent implements OnInit, ControlValueAccessor {
   @Input() index: number;
 
   constructor(
-    private changeDetector: ChangeDetectorRef,
     public operatorsService: OperatorsService
   ) { }
 
