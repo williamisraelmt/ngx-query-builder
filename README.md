@@ -109,7 +109,7 @@ export class AppComponent {
 ```
 
 ```html
-<ngx-query-builder [data]="query" 
+<ngx-query-builder [(ngModel)]="query" 
                    [fieldMap]="fieldMap">
 </ngx-query-builder>
 ```
