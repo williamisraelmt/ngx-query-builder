@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { OperatorsService } from './operators.service';
 
-describe('NgxQueryBuilderService', () => {
+describe('OperatorsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
