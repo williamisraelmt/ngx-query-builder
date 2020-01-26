@@ -1,22 +1,30 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, forwardRef, Input, OnInit} from '@angular/core';
 import {Field, QueryBuilderFieldMap, Rule, RuleSet, QueryBuilderSettings} from './interfaces/ngx-query-builder.interfaces';
 import {OperatorsService} from './services/operators.service';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
   selector: 'ngx-query-builder',
   templateUrl: './ngx-query-builder.component.html',
-  styleUrls: ['./ngx-query-builder.component.scss']
+  styleUrls: ['./ngx-query-builder.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => NgxQueryBuilderComponent),
+    multi: true
+  }]
 })
-export class NgxQueryBuilderComponent implements OnInit {
+export class NgxQueryBuilderComponent implements OnInit, ControlValueAccessor {
 
   @Input() fieldMap: QueryBuilderFieldMap = {};
   @Input() settings: QueryBuilderSettings = {};
+  @Input() disabled = false;
 
   @Input() data: RuleSet = this.getEmptyRuleSetData();
   @Input() parent: RuleSet;
   @Input() index: number;
 
   constructor(
+    private changeDetector: ChangeDetectorRef,
     public operatorsService: OperatorsService
   ) { }
 
@@ -30,32 +38,99 @@ export class NgxQueryBuilderComponent implements OnInit {
     }
   }
 
+  /**** ControlValueAccessor START ****/
+
+  onChange = (data: RuleSet) => {};
+  onTouched = () => {};
+
+  writeValue(data: any): void {
+    this.data = data || this.getEmptyRuleSetData();
+  }
+
+  registerOnChange(fn: (data: RuleSet) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  /**** ControlValueAccessor END ****/
 
   addRule(): void {
+    if (this.disabled) {
+      return;
+    }
+
     this.data.rules.push({
       field: this.getFields()[0].value,
       type: this.getFields()[0].type,
       operator: this.operatorsService.getDefaultOperator()
     });
+
+    this.onChange(this.data);
+    this.onTouched();
   }
 
   removeRule(index: number): void {
+    if (this.disabled) {
+      return;
+    }
+
     this.data.rules.splice(index, 1);
+
+    this.onChange(this.data);
+    this.onTouched();
   }
 
   addRuleSet(): void {
+    if (this.disabled) {
+      return;
+    }
+
     this.data.rules.push(this.getEmptyRuleSetData());
+
+    this.onChange(this.data);
+    this.onTouched();
   }
 
   removeRuleSet(index: number): void {
+    if (this.disabled) {
+      return;
+    }
+
     if (this.hasParentRuleSet()) {
       this.parent.rules.splice(index, 1);
     }
+
+    this.onChange(this.data);
+    this.onTouched();
   }
 
   changeCondition(value: string): void {
+    if (this.disabled) {
+      return;
+    }
+
     this.data.condition = value;
+
+    this.onChange(this.data);
+    this.onTouched();
   }
+
+  changeField(rule: Rule, index: number) {
+    (this.data.rules[index] as Rule).type = this.fieldMap[rule.field].type;
+    (this.data.rules[index] as Rule).operator = this.operatorsService.getDefaultOperator();
+    (this.data.rules[index] as Rule).value = undefined;
+
+    this.onChange(this.data);
+    this.onTouched();
+  }
+
 
   hasParentRuleSet(): boolean {
     return !!this.parent;
@@ -94,12 +169,6 @@ export class NgxQueryBuilderComponent implements OnInit {
 
   getRuleOptions(rule: Rule) {
     return this.fieldMap[rule.field].options ? this.fieldMap[rule.field].options : [];
-  }
-
-  changeField(rule: Rule, index: number) {
-    (this.data.rules[index] as Rule).type = this.fieldMap[rule.field].type;
-    (this.data.rules[index] as Rule).operator = this.operatorsService.getDefaultOperator();
-    (this.data.rules[index] as Rule).value = undefined;
   }
 
 }

@@ -1,3 +1,20 @@
+.ngx-query-builder {
+
+  &.disabled {
+    opacity: 0.5;
+
+    .ngx-btn-add:hover {
+      background-color: #5cb85c;
+      border-color: #4cae4c;
+    }
+
+    .ngx-btn-remove:hover {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+  }
+}
+
 .ngx-group-controls {
   display: flex;
 

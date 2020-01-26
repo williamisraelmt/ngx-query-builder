@@ -1,4 +1,4 @@
-<div class="ngx-query-builder">
+<div class="ngx-query-builder" [ngClass]="{'disabled': disabled}">
   <div class="ngx-group-controls">
     <div class="ngx-condition-switcher">
       <div>
@@ -39,7 +39,7 @@
             <div class="ngx-rule">
 
               <div class="ngx-field">
-                <select class="ngx-control ngx-select" [(ngModel)]="child.field" (change)="changeField(child, i)">
+                <select class="ngx-control ngx-select" [(ngModel)]="child.field" (change)="changeField(child, i)" [disabled]="disabled">
                   <option *ngFor="let field of getFields()" [value]="field.value">
                     {{field.name}}
                   </option>
@@ -47,7 +47,7 @@
               </div>
 
               <div class="ngx-operator">
-                <select class="ngx-control ngx-select" [(ngModel)]="child.operator">
+                <select class="ngx-control ngx-select" [(ngModel)]="child.operator" [disabled]="disabled">
                   <option *ngFor="let operator of operatorsService.getOperators(child, fieldMap)" [value]="operator">
                     {{operatorsService.getOperatorDisplayName(operator)}}
                   </option>
@@ -58,38 +58,38 @@
 
                 <!-- STING -->
                 <ng-container *ngSwitchCase="operatorsService.INPUT_TYPE_STRING">
-                  <input class="ngx-control ngx-input" type="text" [(ngModel)]="child.value">
+                  <input class="ngx-control ngx-input" type="text" [(ngModel)]="child.value" [disabled]="disabled">
                 </ng-container>
 
                 <!-- INTEGER -->
                 <ng-container *ngSwitchCase="operatorsService.INPUT_TYPE_INTEGER">
-                  <input class="ngx-control ngx-input" type="number" [(ngModel)]="child.value">
+                  <input class="ngx-control ngx-input" type="number" [(ngModel)]="child.value" [disabled]="disabled">
                 </ng-container>
 
                 <!-- DOUBLE -->
                 <ng-container *ngSwitchCase="operatorsService.INPUT_TYPE_DOUBLE">
-                  <input class="ngx-control ngx-input" type="number" [(ngModel)]="child.value">
+                  <input class="ngx-control ngx-input" type="number" [(ngModel)]="child.value" [disabled]="disabled">
                 </ng-container>
 
                 <!-- DATE -->
                 <ng-container *ngSwitchCase="operatorsService.INPUT_TYPE_DATE">
-                  <input class="ngx-control ngx-input" type="date" [(ngModel)]="child.value">
+                  <input class="ngx-control ngx-input" type="date" [(ngModel)]="child.value" [disabled]="disabled">
                 </ng-container>
 
                 <!-- TIME -->
                 <ng-container *ngSwitchCase="operatorsService.INPUT_TYPE_TIME">
-                  <input class="ngx-control ngx-input" type="time" [(ngModel)]="child.value">
+                  <input class="ngx-control ngx-input" type="time" [(ngModel)]="child.value" [disabled]="disabled">
                 </ng-container>
 
                 <!-- BOOLEAN -->
                 <ng-container *ngSwitchCase="operatorsService.INPUT_TYPE_BOOLEAN">
                   <div class="ngx-boolean-wrap">
                     <div class="ngx-boolean">
-                      <input id="{{'booleanYes' + i}}" name="{{'boolean' + i}}" type="radio" class="ngx-radio-btn" [(ngModel)]="child.value" [value]="true">
+                      <input id="{{'booleanYes' + i}}" name="{{'boolean' + i}}" type="radio" class="ngx-radio-btn" [(ngModel)]="child.value" [value]="true" [disabled]="disabled">
                       <label for="{{'booleanYes' + i}}" class="ngx-label">Yes</label>
                     </div>
                     <div class="ngx-boolean">
-                      <input id="{{'booleanNo' + i}}" name="{{'boolean' + i}}" type="radio" class="ngx-radio-btn" [(ngModel)]="child.value" [value]="false">
+                      <input id="{{'booleanNo' + i}}" name="{{'boolean' + i}}" type="radio" class="ngx-radio-btn" [(ngModel)]="child.value" [value]="false" [disabled]="disabled">
                       <label for="{{'booleanNo' + i}}" class="ngx-label">No</label>
                     </div>
                   </div>
@@ -97,7 +97,7 @@
 
                 <!-- SELECT -->
                 <ng-container *ngSwitchCase="operatorsService.INPUT_TYPE_SELECT">
-                  <select class="ngx-control ngx-select" [(ngModel)]="child.value">
+                  <select class="ngx-control ngx-select" [(ngModel)]="child.value" [disabled]="disabled">
                     <option *ngFor="let opt of getRuleOptions(child)" [value]="opt.value">
                       {{opt.name}}
                     </option>
@@ -106,7 +106,7 @@
 
                 <!-- MULTI_SELECT -->
                 <ng-container *ngSwitchCase="operatorsService.INPUT_TYPE_MULTI_SELECT">
-                  <select class="ngx-control ngx-multi-select" [(ngModel)]="child.value" multiple>
+                  <select class="ngx-control ngx-multi-select" [(ngModel)]="child.value" [disabled]="disabled" multiple>
                     <option *ngFor="let opt of getRuleOptions(child)" [ngValue]="opt.value">
                       {{opt.name}}
                     </option>
@@ -127,7 +127,9 @@
 
         <!-- rule set -->
         <ng-container *ngIf="child.rules">
-          <ngx-query-builder [data]="child" [fieldMap]="fieldMap" [parent]="data" [index]="i"></ngx-query-builder>
+          <ngx-query-builder [data]="child" [fieldMap]="fieldMap" [parent]="data"
+                             [disabled]="disabled" [index]="i">
+          </ngx-query-builder>
         </ng-container>
 
       </li>

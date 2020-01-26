@@ -2,11 +2,11 @@
   <div class="demo-builder">
     <div class="title">NgxQueryBuilder</div>
     <div class="query-builder">
-      <ngx-query-builder [data]="query" [fieldMap]="fieldMap"></ngx-query-builder>
+      <ngx-query-builder [(ngModel)]="query" [fieldMap]="fieldMap"></ngx-query-builder>
     </div>
   </div>
   <div class="demo-output">
-    <div class="title">Output</div>
+    <div class="title" (click)="logQuery()">Output</div>
     <textarea readonly>{{query | json}}</textarea>
   </div>
 </div>

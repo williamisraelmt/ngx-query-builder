@@ -77,4 +77,8 @@ export class AppComponent {
     }
   };
 
+  logQuery() {
+    console.log(this.query);
+  }
+
 }
